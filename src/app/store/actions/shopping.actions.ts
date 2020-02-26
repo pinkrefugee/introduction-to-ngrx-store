@@ -1,5 +1,5 @@
 
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { ShoppingItem } from '../models/shopping-item.model';
 
 export enum ShoppingActionTypes {
@@ -7,16 +7,20 @@ export enum ShoppingActionTypes {
   DELETE_ITEM = '[SHOPPING] Delete Item'
 }
 
-export class AddItemAction implements Action {
-  readonly type = ShoppingActionTypes.ADD_ITEM
+// export class AddItemAction implements Action {
+//   readonly type = ShoppingActionTypes.ADD_ITEM;
 
-  constructor(public payload: ShoppingItem) { }
-}
+//   constructor(public payload: ShoppingItem) { }
+// }
 
-export class DeleteItemAction implements Action {
-  readonly type = ShoppingActionTypes.DELETE_ITEM
+// export class DeleteItemAction implements Action {
+//   readonly type = ShoppingActionTypes.DELETE_ITEM;
 
-  constructor(public payload: string) { }
-}
+//   constructor(public payload: string) { }
+// }
 
-export type ShoppingAction = AddItemAction | DeleteItemAction
+export const addItem = createAction('[SHOPPING] Add Item', (payload) => ({payload}));
+export const deleteItem = createAction('[SHOPPING] Delete Item', (payload) => ({payload}));
+
+
+//export type ShoppingAction = AddItemAction | DeleteItemAction;

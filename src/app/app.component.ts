@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 
 import { AppState } from './store/models/app-state.model';
 import { ShoppingItem } from './store/models/shopping-item.model';
-import { AddItemAction, DeleteItemAction } from './store/actions/shopping.actions';
+import { addItem, deleteItem } from './store/actions/shopping.actions';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +13,9 @@ import { AddItemAction, DeleteItemAction } from './store/actions/shopping.action
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+
   shoppingItems: Observable<Array<ShoppingItem>>;
-  newShoppingItem: ShoppingItem = { id: '', name: '' }
+  newShoppingItem: ShoppingItem = { id: '', name: '' };
 
   constructor(private store: Store<AppState>) { }
 
@@ -24,14 +24,14 @@ export class AppComponent implements OnInit {
   }
 
   addItem() {
-  this.newShoppingItem.id = uuid();
+    this.newShoppingItem.id = uuid();
 
-    this.store.dispatch(new AddItemAction(this.newShoppingItem));
+    this.store.dispatch(addItem(this.newShoppingItem));
 
     this.newShoppingItem = { id: '', name: '' };
   }
 
   deleteItem(id: string) {
-    this.store.dispatch(new DeleteItemAction(id));
+    this.store.dispatch(deleteItem(id));
   }
 }
